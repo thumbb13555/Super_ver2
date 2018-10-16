@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="首頁" />
+        <item
+            android:id="@+id/nav_food"
+            android:icon="@drawable/food"
+            android:title="食品" />
+        <item
+            android:id="@+id/nav_beverage"
+            android:icon="@drawable/ic_beverage"
+            android:title="飲料" />
+        <item
+            android:id="@+id/nav_ness"
+            android:icon="@drawable/ness"
+            android:title="生活用品" />
+
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_cart"
+            android:title="購物車" />
+        <item
+            android:id="@+id/nav_send"
+            android:icon="@drawable/ic_message_black"
+            android:title="聯繫我們" />
+
+    </group>
+
+
+</menu>

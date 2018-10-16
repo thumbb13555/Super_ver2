@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bkwelcom"
+    android:orientation="vertical"
+    tools:context=".MemberCreate_Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="100dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="帳號:"
+            android:textColor="@color/TitleString"
+            android:textColorLink="@color/TitleString" />
+
+        <EditText
+            android:id="@+id/edCID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:shadowColor="?attr/colorBackgroundFloating"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textColorHighlight="?attr/colorBackgroundFloating"
+            android:textColorHint="?attr/colorBackgroundFloating"
+            android:textColorLink="@color/TitleString"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="密碼:"
+            android:textColor="@color/TitleString"
+            android:textColorLink="@color/TitleString" />
+
+        <EditText
+            android:id="@+id/edCPS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:shadowColor="?attr/colorBackgroundFloating"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textColorHighlight="?attr/colorBackgroundFloating"
+            android:textColorHint="?attr/colorBackgroundFloating"
+            android:textColorLink="@color/TitleString"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="手機:"
+            android:textColor="@color/TitleString"
+            android:textColorLink="@color/TitleString" />
+
+        <EditText
+            android:id="@+id/edCPho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone"
+            android:shadowColor="?attr/colorBackgroundFloating"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textColorHighlight="?attr/colorBackgroundFloating"
+            android:textColorHint="?attr/colorBackgroundFloating"
+            android:textColorLink="@color/TitleString"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btCSur"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:onClick="sendInfo"
+            android:text="確定"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>

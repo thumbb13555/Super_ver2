@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bkwelcom"
+    android:orientation="vertical"
+    tools:context=".Login_Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="180dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="帳號:"
+            android:textColor="@color/TitleString" />
+
+        <EditText
+            android:id="@+id/edID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:shadowColor="?attr/colorBackgroundFloating"
+            android:text="test"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textColorHighlight="?attr/colorBackgroundFloating"
+            android:textColorHint="?attr/colorBackgroundFloating"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="密碼:"
+            android:textColor="@color/TitleString" />
+
+        <EditText
+            android:id="@+id/edPas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:shadowColor="?attr/colorBackgroundFloating"
+            android:text="test"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textColorHighlight="?attr/colorBackgroundFloating"
+            android:textColorHint="?attr/colorBackgroundFloating"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btLog2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:onClick="sendScore"
+            android:text="登入"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>
