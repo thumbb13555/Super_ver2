@@ -22,14 +22,19 @@
             android:title="生活用品" />
 
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/nav_shopping"
             android:icon="@drawable/ic_menu_cart"
             android:title="購物車" />
         <item
-            android:id="@+id/nav_send"
+            android:id="@+id/nav_content"
             android:icon="@drawable/ic_message_black"
             android:title="聯繫我們" />
 
     </group>
+
+
+
+
+
 
 </menu>

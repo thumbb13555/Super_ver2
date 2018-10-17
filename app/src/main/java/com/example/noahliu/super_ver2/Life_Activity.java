@@ -295,9 +295,11 @@ public class Life_Activity extends AppCompatActivity
             finish();
         } else if (id == R.id.nav_ness) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_shopping) {
+            Intent goShopping = new Intent(Life_Activity.this,ShoppingCart_Activity.class);
+            startActivity(goShopping);
+            finish();
+        } else if (id == R.id.nav_content) {
 
         }
 

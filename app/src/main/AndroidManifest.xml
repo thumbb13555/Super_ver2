@@ -35,6 +35,10 @@
         <activity
             android:name=".Life_Activity"
             android:label="@string/title_activity_life_"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ShoppingCart_Activity"
+            android:label="@string/title_activity_shopping_cart_"
             android:theme="@style/AppTheme"></activity>
     </application>
 

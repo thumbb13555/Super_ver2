@@ -1,12 +1,9 @@
 package com.example.noahliu.super_ver2;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,24 +14,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
+public class ShoppingCart_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_shopping_cart);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,7 +49,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.shopping_cart_, menu);
         return true;
     }
 
@@ -85,20 +75,20 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
+            finish();
         } else if (id == R.id.nav_food) {
-            Intent gofood = new Intent(MainActivity.this,Food_Activity.class);
+            Intent gofood = new Intent(ShoppingCart_Activity.this,Food_Activity.class);
             startActivity(gofood);
+            finish();
         } else if (id == R.id.nav_beverage) {
-            Intent gobeverage = new Intent(MainActivity.this,Beverage_Activity.class);
+            Intent gobeverage = new Intent(ShoppingCart_Activity.this,Beverage_Activity.class);
             startActivity(gobeverage);
+            finish();
         } else if (id == R.id.nav_ness) {
-            Intent golife = new Intent(MainActivity.this,Life_Activity.class);
+            Intent golife = new Intent(ShoppingCart_Activity.this,Life_Activity.class);
             startActivity(golife);
-
+            finish();
         } else if (id == R.id.nav_shopping) {
-            Intent goShopping = new Intent(MainActivity.this,ShoppingCart_Activity.class);
-            startActivity(goShopping);
 
         } else if (id == R.id.nav_content) {
 
@@ -108,23 +98,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    //---------------set quit function----------------------
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            new  AlertDialog.Builder(MainActivity.this).setTitle("退出")
-                    .setMessage("請問是否關閉程式?")
-                    .setPositiveButton("是",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish(); // 離開程式
-                                    System.exit(0);
-                                }
-                            }).setNegativeButton("否",null).show();
-        }
-        return false;
-    }
-    //-----------End quit function---------------------
 }

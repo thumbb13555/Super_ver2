@@ -302,9 +302,11 @@ public class Beverage_Activity extends AppCompatActivity
             Intent golife = new Intent(Beverage_Activity.this,Life_Activity.class);
             startActivity(golife);
             finish();
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_shopping) {
+            Intent goShopping = new Intent(Beverage_Activity.this,ShoppingCart_Activity.class);
+            startActivity(goShopping);
+            finish();
+        } else if (id == R.id.nav_content) {
 
         }
 

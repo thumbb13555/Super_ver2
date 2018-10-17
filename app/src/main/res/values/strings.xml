@@ -15,4 +15,5 @@
     <string name="title_activity_life_">日常用品</string>
     <string name="PutInCart">已將商品加入購物車！</string>
     <string name="PutOutCart">痾...放回去</string>
+    <string name="title_activity_shopping_cart_">ShoppingCart_Activity</string>
 </resources>
