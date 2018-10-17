@@ -49,6 +49,7 @@ public class Food_Activity extends AppCompatActivity
     String line=null;
     String result = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +73,7 @@ public class Food_Activity extends AppCompatActivity
         collectData();
         CustomListView customListView = new CustomListView(this,title,script,img);
         listView.setAdapter(customListView);
+
 
     }
     private  void collectData()
@@ -194,14 +196,9 @@ public class Food_Activity extends AppCompatActivity
                 Cart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        if(Cart.getText().equals("已加入！")){
-                            Cart.setText(R.string.before_cart_push);
-                            Toast.makeText(getContext(),R.string.PutOutCart,Toast.LENGTH_SHORT).show();
-                        }else{
-                            Cart.setText(R.string.after_cart_push);
-                            Toast.makeText(getContext(),R.string.PutInCart,Toast.LENGTH_SHORT).show();
-                        }
+                        String newEntry1 =tvw1.getText().toString();
+                        String newEntyr2 =tvw2.getText().toString();
+                        
                     }
                 });
 
@@ -307,4 +304,7 @@ public class Food_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
+
