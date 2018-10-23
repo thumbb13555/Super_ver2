@@ -1,7 +1,9 @@
 package com.example.noahliu.super_ver2;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -27,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.database.sqlite.SQLiteDatabase;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -49,6 +51,11 @@ public class Beverage_Activity extends AppCompatActivity
     String line=null;
     String result = null;
     Button Cart;
+    private DBHelper dbHelper;
+    public static final String TABLE_NAME="friends";
+    public static final String NAME="name";
+    public static final String TEL="tel";
+    public static final String EMAIL="email";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,13 +208,13 @@ public class Beverage_Activity extends AppCompatActivity
                 Cart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(Cart.getText().equals("已加入！")){
-                            Cart.setText(R.string.before_cart_push);
-                            Toast.makeText(getContext(),R.string.PutOutCart,Toast.LENGTH_SHORT).show();
-                        }else{
-                            Cart.setText(R.string.after_cart_push);
-                            Toast.makeText(getContext(),R.string.PutInCart,Toast.LENGTH_SHORT).show();
-                        }
+                        openDatabase();
+                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+                        values.put(NAME,tvw1.getText().toString());
+                        values.put(TEL,tvw2.getText().toString());
+                        db.insert(TABLE_NAME,null,values);
+                        Cart.setText("已加入！");
 
                     }
                 });
@@ -313,5 +320,9 @@ public class Beverage_Activity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void openDatabase(){
+        dbHelper=new DBHelper(this);   //取得DBHelper物件
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.noahliu.super_ver2;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.database.sqlite.SQLiteDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -48,7 +50,11 @@ public class Food_Activity extends AppCompatActivity
     BufferedInputStream is;
     String line=null;
     String result = null;
-
+    private DBHelper dbHelper;
+    public static final String TABLE_NAME="friends";
+    public static final String NAME="name";
+    public static final String TEL="tel";
+    public static final String EMAIL="email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,9 +202,13 @@ public class Food_Activity extends AppCompatActivity
                 Cart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String newEntry1 =tvw1.getText().toString();
-                        String newEntyr2 =tvw2.getText().toString();
-                        
+                        openDatabase();
+                       SQLiteDatabase db = dbHelper.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+                        values.put(NAME,tvw1.getText().toString());
+                        values.put(TEL,tvw2.getText().toString());
+                        db.insert(TABLE_NAME,null,values);
+                        Cart.setText("已加入！");
                     }
                 });
 
@@ -304,7 +314,10 @@ public class Food_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private void openDatabase(){
+        dbHelper=new DBHelper(this);   //取得DBHelper物件
 
+    }
 
 }
 

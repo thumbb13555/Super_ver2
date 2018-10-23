@@ -9,8 +9,8 @@
     tools:showIn="@layout/app_bar_shopping_cart_">
 
     <ListView
+        android:id="@+id/lvCart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

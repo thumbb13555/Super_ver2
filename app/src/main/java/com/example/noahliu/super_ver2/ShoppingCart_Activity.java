@@ -1,11 +1,16 @@
 package com.example.noahliu.super_ver2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,29 +20,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.provider.BaseColumns._ID;
+
 public class ShoppingCart_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-        private  static final String TAG = "ListDataActivity";
+    private ListView listData;
+    private DBHelper dbHelper;
+    public static final String TABLE_NAME="friends";
+    public static final String NAME="name";
+    public static final String TEL="tel";
+    public static final String EMAIL="email";
+    TextView tvID;
+    Button btDele;
 
-        private ListView mListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
+        listData = (ListView) findViewById(R.id.lvCart);
+        tvID = (TextView) findViewById(R.id.txtId);
+        btDele = (Button) findViewById(R.id.btDel);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -49,10 +69,42 @@ public class ShoppingCart_Activity extends AppCompatActivity
 
 
 
+        openDatabase();
+        showInList();    //show listview
+
+
+    }
+    public void Del(View view){
+        Toast.makeText(getApplicationContext(),"刪除",Toast.LENGTH_SHORT).show();
+        //此處刪除資料的部分暫時不管//
+        del();//目前是一次刪除全資料表
     }
 
 
+    private void openDatabase(){
+        dbHelper=new DBHelper(this);   //取得DBHelper物件
 
+    }
+    private void showInList(){
+        Cursor cursor = getCursor();
+        String[] from = {_ID,NAME,TEL};
+        int[] to = {R.id.txtId,R.id.tvName,R.id.tvSale};
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.shoppingcart_layout,cursor,from,to); //SimpleCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to)
+        listData.setAdapter(adapter);
+    }
+    private Cursor getCursor(){
+        SQLiteDatabase db=dbHelper.getReadableDatabase();  //透過dbHelper取得讀取資料庫的SQLiteDatabase物件，可用在查詢
+        String[] columns={_ID,NAME,TEL};
+        Cursor cursor = db.query(TABLE_NAME,columns,null,null,null,null,null);  //查詢所有欄位的資料
+        return cursor;
+    }
+    private  void del(){
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+        String id=_ID;
+        Log.v("BT",id);
+        db.delete(TABLE_NAME,_ID+"="+id,null);
+
+    }
 
     //-----
     @Override
@@ -117,4 +169,6 @@ public class ShoppingCart_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
+
