@@ -7,4 +7,5 @@
     <color name="Mycolor2">#fd6262</color>
     <color name="blank">#00fd6262</color>
     <color name="TitleString">#b7fcfcfc</color>
+    <color name="navTitle">#b7fbbb53</color>
 </resources>

@@ -3,6 +3,7 @@
     package="com.example.noahliu.super_ver2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -39,7 +40,8 @@
         <activity
             android:name=".ShoppingCart_Activity"
             android:label="@string/title_activity_shopping_cart_"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".QRCodeScanActivity"></activity>
     </application>
 
 </manifest>

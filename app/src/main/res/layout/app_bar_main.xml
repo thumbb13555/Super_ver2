@@ -29,6 +29,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="30dp"
         app:backgroundTint="?attr/colorBackgroundFloating"
-        app:srcCompat="@drawable/ic_qrcode" />
+        app:srcCompat="@drawable/ic_qrcode"
+        android:backgroundTint="#000000"/>
 
 </android.support.design.widget.CoordinatorLayout>
