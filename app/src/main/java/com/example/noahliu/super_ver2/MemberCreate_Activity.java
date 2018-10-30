@@ -44,7 +44,7 @@ public class MemberCreate_Activity extends AppCompatActivity {
         String strPhone = edCreatePhone.getText().toString();
 
         String strData ="Account=" + strID + "&Password=" + strPassword+"&Phone="+strPhone;
-        Log.v("Bt",strData);
+        //Log.v("Bt",strData);
         if (strID.length() > 0 && strPassword.length() > 0){
             new MemberCreate_Activity.HttpRequestAsyncTask_CreateMember(this,SERVERIP,PORTNO,PHPSCRIPT,strData).execute();
         }else {
@@ -86,6 +86,7 @@ public class MemberCreate_Activity extends AppCompatActivity {
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os,"UTF-8"));
                 writer.write(strData);//輸出資料
+                Log.v("BT",strData);
                 writer.flush();//清空輸出的資料
                 writer.close();//關閉輸出緩衝器
                 os.close();//關閉輸出流
@@ -122,7 +123,7 @@ public class MemberCreate_Activity extends AppCompatActivity {
         protected void onPostExecute(String G) {
             loading.dismiss();
 
-            Log.v("Bt",G);
+            //Log.v("Bt",G);
             if(G.contains("success"))
             {
                 Toast.makeText(this.context,"恭喜你申請成功!請重新登入~",

@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -40,13 +41,15 @@ public class ShoppingCart_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listData;
-    private DBHelper dbHelper;
+
     public static final String TABLE_NAME="friends";
     public static final String NAME="name";
     public static final String TEL="tel";
     public static final String EMAIL="email";
-    TextView tvID;
-    Button btDele;
+    TextView tvID,tvTotle,tvSales,tvamount;
+    Button btDele,btChickout,btPluss,btMiners;
+    public int number = 1;
+    private int totleMoney = 0;
 
 
     @Override
@@ -57,7 +60,13 @@ public class ShoppingCart_Activity extends AppCompatActivity
         setSupportActionBar(toolbar);
         listData = (ListView) findViewById(R.id.lvCart);
         tvID = (TextView) findViewById(R.id.txtId);
-        btDele = (Button) findViewById(R.id.btDel);
+
+        tvTotle = (TextView) findViewById(R.id.texttotle);
+        btChickout = (Button) findViewById(R.id.chickou);
+        tvamount = (TextView) findViewById(R.id.amount);
+
+        btMiners = (Button) findViewById(R.id.btMiner);
+        tvSales = (TextView)findViewById(R.id.tvSale);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -69,42 +78,13 @@ public class ShoppingCart_Activity extends AppCompatActivity
 
 
 
-        openDatabase();
-        showInList();    //show listview
 
 
-    }
-    public void Del(View view){
-        Toast.makeText(getApplicationContext(),"刪除",Toast.LENGTH_SHORT).show();
-        //此處刪除資料的部分暫時不管//
-        del();//目前是一次刪除全資料表
+
     }
 
 
-    private void openDatabase(){
-        dbHelper=new DBHelper(this);   //取得DBHelper物件
 
-    }
-    private void showInList(){
-        Cursor cursor = getCursor();
-        String[] from = {_ID,NAME,TEL};
-        int[] to = {R.id.txtId,R.id.tvName,R.id.tvSale};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.shoppingcart_layout,cursor,from,to); //SimpleCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to)
-        listData.setAdapter(adapter);
-    }
-    private Cursor getCursor(){
-        SQLiteDatabase db=dbHelper.getReadableDatabase();  //透過dbHelper取得讀取資料庫的SQLiteDatabase物件，可用在查詢
-        String[] columns={_ID,NAME,TEL};
-        Cursor cursor = db.query(TABLE_NAME,columns,null,null,null,null,null);  //查詢所有欄位的資料
-        return cursor;
-    }
-    private  void del(){
-        SQLiteDatabase db=dbHelper.getWritableDatabase();
-        String id=_ID;
-        Log.v("BT",id);
-        db.delete(TABLE_NAME,_ID+"="+id,null);
-
-    }
 
     //-----
     @Override

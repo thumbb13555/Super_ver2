@@ -51,7 +51,7 @@ public class Beverage_Activity extends AppCompatActivity
     String line=null;
     String result = null;
     Button Cart;
-    private DBHelper dbHelper;
+
     public static final String TABLE_NAME="friends";
     public static final String NAME="name";
     public static final String TEL="tel";
@@ -208,12 +208,7 @@ public class Beverage_Activity extends AppCompatActivity
                 Cart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        openDatabase();
-                        SQLiteDatabase db = dbHelper.getWritableDatabase();
-                        ContentValues values = new ContentValues();
-                        values.put(NAME,tvw1.getText().toString());
-                        values.put(TEL,tvw2.getText().toString());
-                        db.insert(TABLE_NAME,null,values);
+
                         Cart.setText("已加入！");
 
                     }
@@ -321,8 +316,5 @@ public class Beverage_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void openDatabase(){
-        dbHelper=new DBHelper(this);   //取得DBHelper物件
 
-    }
 }
