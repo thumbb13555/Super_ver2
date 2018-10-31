@@ -30,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.facebook.stetho.Stetho;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -50,6 +52,7 @@ public class Food_Activity extends AppCompatActivity
     BufferedInputStream is;
     String line=null;
     String result = null;
+    DatabaseHelper  myDB;
         public static final String TABLE_NAME="friends";
     public static final String NAME="name";
     public static final String TEL="tel";
@@ -61,7 +64,7 @@ public class Food_Activity extends AppCompatActivity
         setContentView(R.layout.food_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        myDB = new DatabaseHelper(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -78,6 +81,7 @@ public class Food_Activity extends AppCompatActivity
         collectData();
         CustomListView customListView = new CustomListView(this,title,script,img);
         listView.setAdapter(customListView);
+        Stetho.initializeWithDefaults(this);
 
 
     }
@@ -201,8 +205,17 @@ public class Food_Activity extends AppCompatActivity
                 Cart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        String Title = tvw1.getText().toString();
+                        String Sale = tvw2.getText().toString();
+                        Log.v("BT",Title+Sale);
+                        boolean insertData = myDB.addData(Title,Sale);
+                        if(insertData==true){
+                            Toast.makeText(Food_Activity.this,"加入購物車！",Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(Food_Activity.this,"Something went wrong :(.",Toast.LENGTH_LONG).show();
+                        }
 
-                        Cart.setText("已加入！");
+
                     }
                 });
 
@@ -308,7 +321,7 @@ public class Food_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    
 
 }
 

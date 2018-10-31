@@ -40,7 +40,8 @@ import static android.provider.BaseColumns._ID;
 public class ShoppingCart_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView listData;
+    private ListView listView;
+    DatabaseHelper myDB;
 
     public static final String TABLE_NAME="friends";
     public static final String NAME="name";
@@ -58,7 +59,10 @@ public class ShoppingCart_Activity extends AppCompatActivity
         setContentView(R.layout.activity_shopping_cart);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        listData = (ListView) findViewById(R.id.lvCart);
+
+        myDB = new DatabaseHelper(this);
+        
+
         tvID = (TextView) findViewById(R.id.txtId);
 
         tvTotle = (TextView) findViewById(R.id.texttotle);
