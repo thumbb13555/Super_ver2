@@ -1,17 +1,11 @@
 package com.example.noahliu.super_ver2;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,28 +14,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-
-import static android.provider.BaseColumns._ID;
+import android.support.annotation.Nullable;
 
 public class ShoppingCart_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
     DatabaseHelper myDB;
+    ArrayList<User> userList;
+    User user;
 
     public static final String TABLE_NAME="friends";
     public static final String NAME="name";
@@ -49,39 +38,48 @@ public class ShoppingCart_Activity extends AppCompatActivity
     public static final String EMAIL="email";
     TextView tvID,tvTotle,tvSales,tvamount;
     Button btDele,btChickout,btPluss,btMiners;
-    public int number = 1;
-    private int totleMoney = 0;
+
+
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        myDB = new DatabaseHelper(this);
-        
-
-        tvID = (TextView) findViewById(R.id.txtId);
-
-        tvTotle = (TextView) findViewById(R.id.texttotle);
-        btChickout = (Button) findViewById(R.id.chickou);
-        tvamount = (TextView) findViewById(R.id.amount);
-
-        btMiners = (Button) findViewById(R.id.btMiner);
-        tvSales = (TextView)findViewById(R.id.tvSale);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        listView = (ListView) findViewById(R.id.lvCart);
+        //========List
+        myDB = new DatabaseHelper(this);
+        userList = new ArrayList<>();
+        Cursor data = myDB.getListContents();
+        int numRows = data.getCount();
+        if(numRows == 0){
+            Toast.makeText(ShoppingCart_Activity.this,"目前購物車是空的喔！",Toast.LENGTH_LONG).show();
+        }else{
+            int i=0;
+            while(data.moveToNext()){
+                user = new User(data.getString(1),data.getString(2),data.getString(0));
+                userList.add(i,user);
+                Log.v("BT","品名："+data.getString(1)+"  價錢："+data.getString(2)+"  ID:"+data.getString(0));
 
-    }
+            }
+            TheListView adapter = new TheListView(this,R.layout.shoppingcart_layout,userList);
+            listView.setAdapter(adapter);
+        }
 
+
+
+        //========
+    }//EndOnCreate
 
 
 

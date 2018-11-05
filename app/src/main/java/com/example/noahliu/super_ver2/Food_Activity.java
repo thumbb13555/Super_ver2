@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.database.sqlite.SQLiteDatabase;
 
+
 import com.facebook.stetho.Stetho;
 
 import org.json.JSONArray;
@@ -82,6 +83,7 @@ public class Food_Activity extends AppCompatActivity
         CustomListView customListView = new CustomListView(this,title,script,img);
         listView.setAdapter(customListView);
         Stetho.initializeWithDefaults(this);
+
 
 
     }
@@ -321,7 +323,7 @@ public class Food_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    
+
 
 }
 

@@ -51,6 +51,7 @@ public class Beverage_Activity extends AppCompatActivity
     String line=null;
     String result = null;
     Button Cart;
+    DatabaseHelper  myDB;
 
     public static final String TABLE_NAME="friends";
     public static final String NAME="name";
@@ -62,7 +63,7 @@ public class Beverage_Activity extends AppCompatActivity
         setContentView(R.layout.activity_beverage_);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        myDB = new DatabaseHelper(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -209,7 +210,15 @@ public class Beverage_Activity extends AppCompatActivity
                     @Override
                     public void onClick(View view) {
 
-                        Cart.setText("已加入！");
+                        String Title = tvw1.getText().toString();
+                        String Sale = tvw2.getText().toString();
+                        Log.v("BT",Title+Sale);
+                        boolean insertData = myDB.addData(Title,Sale);
+                        if(insertData==true){
+                            Toast.makeText(Beverage_Activity.this,"加入購物車！",Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(Beverage_Activity.this,"Something went wrong :(.",Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 });

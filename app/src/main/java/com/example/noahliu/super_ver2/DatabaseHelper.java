@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -50,5 +51,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         return data;
+    }
+
+    public Integer deleteData(String id){
+        Log.v("BT","herre");
+        SQLiteDatabase db = this.getWritableDatabase();
+        return  db.delete(TABLE_NAME,"ID = ",new String[] {id});
+
+
     }
 }
