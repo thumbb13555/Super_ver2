@@ -30,6 +30,7 @@ public class TheListView extends ArrayAdapter<User> {
 
 
 
+
     public TheListView(Context context, int textViewResourceId, ArrayList<User> users) {
         super(context, textViewResourceId, users);
         this.users = users;
@@ -38,14 +39,15 @@ public class TheListView extends ArrayAdapter<User> {
 
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(mViewResourceId, null);
-        User user = users.get(position);
+        final User user = users.get(position);
+
 
 
         if (user != null) {
             final TextView title = (TextView) convertView.findViewById(R.id.tvName);
-            TextView sale = (TextView) convertView.findViewById(R.id.tvSale);
+            final TextView sale = (TextView) convertView.findViewById(R.id.tvSale);
             final TextView txId = (TextView) convertView.findViewById(R.id.txtId);
             Button btD = (Button) convertView.findViewById(R.id.btDel);
             Button btPlus = (Button) convertView.findViewById(R.id.btPlus);
@@ -69,7 +71,11 @@ public class TheListView extends ArrayAdapter<User> {
                     SQLiteDatabase db = myDB.getWritableDatabase();
                     String id = txId.getText().toString();
                     db.delete("Cart", "ID=" + id, null);
+                    remove(getItem(position));
+                    Toast.makeText(getContext(),"已刪除商品！",Toast.LENGTH_SHORT).show();
                     db.close();
+
+
 
                 }
             });
@@ -78,6 +84,7 @@ public class TheListView extends ArrayAdapter<User> {
                 public void onClick(View view) {
                     amount += 1;
                     Amount.setText(String.valueOf(amount));
+
                 }
             });
             btMin.setOnClickListener(new View.OnClickListener() {

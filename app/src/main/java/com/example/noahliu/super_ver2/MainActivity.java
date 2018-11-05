@@ -16,9 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private ImageView food, beverage, futur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +28,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        food = (ImageView) findViewById(R.id.food);
+        beverage = (ImageView) findViewById(R.id.drink);
+        futur = (ImageView) findViewById(R.id.furniture);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,QRCodeScanActivity.class));
+                startActivity(new Intent(MainActivity.this, QRCodeScanActivity.class));
             }
         });//懸浮按鈕
 
@@ -43,8 +48,33 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        ImageChick();
     }//End onCreate
+
+
+    private void ImageChick() {
+        food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gofood = new Intent(MainActivity.this, Food_Activity.class);
+                startActivity(gofood);
+            }
+        });
+        beverage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gobeverage = new Intent(MainActivity.this, Beverage_Activity.class);
+                startActivity(gobeverage);
+            }
+        });
+        futur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent golife = new Intent(MainActivity.this, Life_Activity.class);
+                startActivity(golife);
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
@@ -87,17 +117,17 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_food) {
-            Intent gofood = new Intent(MainActivity.this,Food_Activity.class);
+            Intent gofood = new Intent(MainActivity.this, Food_Activity.class);
             startActivity(gofood);
         } else if (id == R.id.nav_beverage) {
-            Intent gobeverage = new Intent(MainActivity.this,Beverage_Activity.class);
+            Intent gobeverage = new Intent(MainActivity.this, Beverage_Activity.class);
             startActivity(gobeverage);
         } else if (id == R.id.nav_ness) {
-            Intent golife = new Intent(MainActivity.this,Life_Activity.class);
+            Intent golife = new Intent(MainActivity.this, Life_Activity.class);
             startActivity(golife);
 
         } else if (id == R.id.nav_shopping) {
-            Intent goShopping = new Intent(MainActivity.this,ShoppingCart_Activity.class);
+            Intent goShopping = new Intent(MainActivity.this, ShoppingCart_Activity.class);
             startActivity(goShopping);
 
         } else if (id == R.id.nav_content) {
@@ -108,12 +138,12 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     //---------------set quit function----------------------
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            new  AlertDialog.Builder(MainActivity.this).setTitle("退出")
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            new AlertDialog.Builder(MainActivity.this).setTitle("退出")
                     .setMessage("請問是否關閉程式?")
                     .setPositiveButton("是",
                             new DialogInterface.OnClickListener() {
@@ -122,7 +152,7 @@ public class MainActivity extends AppCompatActivity
                                     finish(); // 離開程式
                                     System.exit(0);
                                 }
-                            }).setNegativeButton("否",null).show();
+                            }).setNegativeButton("否", null).show();
         }
         return false;
     }

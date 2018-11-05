@@ -1,10 +1,12 @@
 package com.example.noahliu.super_ver2;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +23,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
+
 import android.support.annotation.Nullable;
 
 public class ShoppingCart_Activity extends AppCompatActivity
@@ -32,14 +36,12 @@ public class ShoppingCart_Activity extends AppCompatActivity
     ArrayList<User> userList;
     User user;
 
-    public static final String TABLE_NAME="friends";
-    public static final String NAME="name";
-    public static final String TEL="tel";
-    public static final String EMAIL="email";
-    TextView tvID,tvTotle,tvSales,tvamount;
-    Button btDele,btChickout,btPluss,btMiners;
-
-
+    public static final String TABLE_NAME = "friends";
+    public static final String NAME = "name";
+    public static final String TEL = "tel";
+    public static final String EMAIL = "email";
+    TextView tvID, tvTotle, tvSales, tvamount;
+    Button btChickout;
 
 
     @Override
@@ -58,29 +60,43 @@ public class ShoppingCart_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         listView = (ListView) findViewById(R.id.lvCart);
         //========List
+        btChickout = (Button) findViewById(R.id.chickou);
         myDB = new DatabaseHelper(this);
         userList = new ArrayList<>();
         Cursor data = myDB.getListContents();
         int numRows = data.getCount();
-        if(numRows == 0){
-            Toast.makeText(ShoppingCart_Activity.this,"目前購物車是空的喔！",Toast.LENGTH_LONG).show();
-        }else{
-            int i=0;
-            while(data.moveToNext()){
-                user = new User(data.getString(1),data.getString(2),data.getString(0));
-                userList.add(i,user);
-                Log.v("BT","品名："+data.getString(1)+"  價錢："+data.getString(2)+"  ID:"+data.getString(0));
+        if (numRows == 0) {
+            Toast.makeText(ShoppingCart_Activity.this, "目前購物車是空的喔！", Toast.LENGTH_LONG).show();
+        } else {
+            int i = 0;
+            while (data.moveToNext()) {
+                user = new User(data.getString(1), data.getString(2), data.getString(0));
+                userList.add(i, user);
+                Log.v("BT", "品名：" + data.getString(1) + "  價錢：" + data.getString(2) + "  ID:" + data.getString(0));
 
             }
-            TheListView adapter = new TheListView(this,R.layout.shoppingcart_layout,userList);
+            TheListView adapter = new TheListView(this, R.layout.shoppingcart_layout, userList);
             listView.setAdapter(adapter);
         }
+        btChickout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(ShoppingCart_Activity.this)
+                        .setTitle("下單確認")
+                        .setMessage("按下確認鍵即完成下單，確定嗎？")
+                        .setPositiveButton("是",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Toast.makeText(getBaseContext(), "請繼續填寫領取地點與時間！", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).setNegativeButton("否", null).show();
+            }
 
 
-
+        });
         //========
     }//EndOnCreate
-
 
 
     //-----
@@ -125,15 +141,15 @@ public class ShoppingCart_Activity extends AppCompatActivity
         if (id == R.id.nav_home) {
             finish();
         } else if (id == R.id.nav_food) {
-            Intent gofood = new Intent(ShoppingCart_Activity.this,Food_Activity.class);
+            Intent gofood = new Intent(ShoppingCart_Activity.this, Food_Activity.class);
             startActivity(gofood);
             finish();
         } else if (id == R.id.nav_beverage) {
-            Intent gobeverage = new Intent(ShoppingCart_Activity.this,Beverage_Activity.class);
+            Intent gobeverage = new Intent(ShoppingCart_Activity.this, Beverage_Activity.class);
             startActivity(gobeverage);
             finish();
         } else if (id == R.id.nav_ness) {
-            Intent golife = new Intent(ShoppingCart_Activity.this,Life_Activity.class);
+            Intent golife = new Intent(ShoppingCart_Activity.this, Life_Activity.class);
             startActivity(golife);
             finish();
         } else if (id == R.id.nav_shopping) {
