@@ -89,6 +89,10 @@ public class ShoppingCart_Activity extends AppCompatActivity
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Toast.makeText(getBaseContext(), "請繼續填寫領取地點與時間！", Toast.LENGTH_SHORT).show();
+                                        Intent intentt = new Intent(ShoppingCart_Activity.this,Position_Chick.class);
+                                        startActivity(intentt);
+                                        finish();
+
                                     }
                                 }).setNegativeButton("否", null).show();
             }

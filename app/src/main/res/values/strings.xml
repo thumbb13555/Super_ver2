@@ -16,4 +16,31 @@
     <string name="PutInCart">已將商品加入購物車！</string>
     <string name="PutOutCart">痾...放回去</string>
     <string name="title_activity_shopping_cart_">購物車</string>
+    <string-array name="country">
+        <item>台中市</item>
+        <item>台北市</item>
+        <item>高雄縣</item>
+        <item>北京</item>
+        <item>上海</item>
+    </string-array>
+
+    <string-array name="Area">
+
+        <item>龍井區</item>
+        <item>大安區</item>
+        <item>左營</item>
+        <item>朝陽區</item>
+        <item>崇明區</item>
+
+    </string-array>
+
+    <string-array name="store">
+
+        <item>龍井一號區</item>
+        <item>大安三號區</item>
+        <item>左營五號區</item>
+        <item>朝陽八號區</item>
+        <item>崇明二號區</item>
+
+    </string-array>
 </resources>

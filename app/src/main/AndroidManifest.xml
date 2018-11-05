@@ -42,6 +42,7 @@
             android:label="@string/title_activity_shopping_cart_"
             android:theme="@style/AppTheme" />
         <activity android:name=".QRCodeScanActivity"></activity>
+        <activity android:name=".Position_Chick"></activity>
     </application>
 
 </manifest>
