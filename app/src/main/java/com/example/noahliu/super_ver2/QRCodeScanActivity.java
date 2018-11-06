@@ -24,7 +24,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class QRCodeScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
     private static final String SERVERIP = "120.109.18.119";
     private static final String PORTNO = "";
-    private static final String PHPSCRIPT = "/joomla/jacky/recelive_ok.php?";
+    private static final String PHPSCRIPT = "/joomla/jacky/receive_ok.php";
     private static final String THEDATA = "numcustomer=1";
     ZXingScannerView ScanenerView;
     @Override
@@ -78,6 +78,7 @@ public class QRCodeScanActivity extends AppCompatActivity implements ZXingScanne
         protected String doInBackground(Void... params) {
             try {//嘗試連線至server
                 //連線設定
+
                 URL ur1 = new URL("http://" + strIP + ":" + strPort + "/" + strScript);
                 HttpURLConnection conn = (HttpURLConnection) ur1.openConnection();
                 conn.setReadTimeout(15000/*millisecond*/);
@@ -92,6 +93,7 @@ public class QRCodeScanActivity extends AppCompatActivity implements ZXingScanne
                         new OutputStreamWriter(os,"UTF-8"));
                 writer.write(strData);//輸出資料
                 Log.v("BT",strData);
+
                 writer.flush();//清空輸出的資料
                 writer.close();//關閉輸出緩衝器
                 os.close();//關閉輸出流

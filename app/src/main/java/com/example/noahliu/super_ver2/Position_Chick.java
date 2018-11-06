@@ -32,7 +32,7 @@ public class Position_Chick extends AppCompatActivity implements AdapterView.OnI
     private static final String SERVERIP = "120.109.18.119";
     private static final String PORTNO = "";
     private static final String PHPSCRIPT = "/joomla/jacky/order_ok.php?";
-    private static final String THEDATA = "soda=1&noodle=1&toothbrush=1";
+    private static final String THEDATA = "soda=1&noodle=2&toothbrush=3";
     TextView time;
     TimePicker simpleTimePicker;
     @Override
@@ -40,15 +40,6 @@ public class Position_Chick extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_position__chick);
 
-        btFinish = (Button) findViewById(R.id.btFinish);
-        btFinish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"感謝您的訂購,麻煩您於"+time.getText()+"領取哦！",Toast.LENGTH_LONG).show();
-                new Position_Chick.HttpRequestAsyncTask_OPENSand(getBaseContext(),SERVERIP,PORTNO,PHPSCRIPT,THEDATA);
-                finish();
-            }
-        });
 //Set sp1 item
         sp1 = (Spinner) findViewById(R.id.spinner1);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.country,android.R.layout.simple_spinner_item);
@@ -79,10 +70,20 @@ public class Position_Chick extends AppCompatActivity implements AdapterView.OnI
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 //0Toast.makeText(getApplicationContext(), hourOfDay + " " + minute, Toast.LENGTH_SHORT).show();
                 time.setText("領取時間：" + hourOfDay + "：" +minute);
+
             }
         });
 
+    }//onCreate
+
+    public void finish(View view){
+        Toast.makeText(getApplicationContext(),"感謝您的訂購,麻煩您於"+time.getText()+"領取哦！",Toast.LENGTH_LONG).show();
+        String strData =THEDATA;
+        new Position_Chick.HttpRequestAsyncTask_OPENSand(this,SERVERIP,PORTNO,PHPSCRIPT,strData).execute();
+
+        finish();
     }
+
 
     //Spinner's Subprogram
     @Override
@@ -129,7 +130,7 @@ public class Position_Chick extends AppCompatActivity implements AdapterView.OnI
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os,"UTF-8"));
                 writer.write(strData);//輸出資料
-                Log.v("BT",strData);
+                Log.v("BT","here");
                 writer.flush();//清空輸出的資料
                 writer.close();//關閉輸出緩衝器
                 os.close();//關閉輸出流

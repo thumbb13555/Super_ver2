@@ -109,6 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="?android:attr/colorActivatedHighlight"
+        android:onClick="finish"
         android:text="訂單確定"
         android:textColor="@color/TitleString"
         android:textSize="25dp" />
